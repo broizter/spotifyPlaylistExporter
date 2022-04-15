@@ -12,7 +12,7 @@ I wrote this script since I wanted to export my Spotify playlists into text file
 
 ## Configuration
 
-Edit config.py and change the examples to fit your environment. If you are using Windows you will need to use forwardslashes (/) when specifying a path in "OUTPUTDIRECTORY". If you need help figuring out your client_id, client_secret and refresh_token you can use this blog post as guidance https://benwiz.com/blog/create-spotify-refresh-token/.
+Edit config.ini and change the examples to fit your environment. Windows users will need to use forwardslashes (/) instead of the typical backslashes when specifying a path in "OUTPUTDIRECTORY". If you need help figuring out your client_id, client_secret and refresh_token you can use this blog post as guidance https://benwiz.com/blog/create-spotify-refresh-token/. When you're done editing the config you should be ready to invoke main.py!
 
 ## License
 

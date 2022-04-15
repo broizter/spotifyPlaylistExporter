@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 
 import requests
-import config
+import configparser
 
 def authenticate():
 	authUrl = 'https://accounts.spotify.com/api/token'
 	data = {
 		'grant_type': 'refresh_token',
-		'refresh_token': f'{config.REFRESH_TOKEN}',
+		'refresh_token': f'{refreshToken}',
 		'Content-Type': 'application/x-www-form-urlencoded',
-		'client_id': f'{config.CLIENT_ID}',
-		'client_secret': f'{config.CLIENT_SECRET}'
+		'client_id': f'{clientId}',
+		'client_secret': f'{clientSecret}'
 	}
 	r = (requests.post(authUrl, data=data))
 	token = r.json()['access_token']
@@ -53,9 +53,18 @@ def processPlaylists(playlist, token):
 			baseUrl = response['next']
 		else:
 			doloop = False
-			with open(f'{config.OUTPUTFOLDER}/{playlist}.txt', 'w', encoding='utf-8') as f:
+			with open(f'{outputFolder}/{playlist}.txt', 'w', encoding='utf-8') as f:
 				print(result, end='', file=f)
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+playlists = config['main']['playlists'].split(", ")
+outputFolder = config['main']['output_folder']
+clientId = config['auth']['client_id']
+clientSecret = config['auth']['client_secret']
+refreshToken = config['auth']['refresh_token']
+
 token = authenticate()
-for p in config.PLAYLISTS:
+for p in playlists:
 	processPlaylists(p, token)
