@@ -47,8 +47,8 @@ def processPlaylists(playlist, token, date, datePrefix):
 
         result = ''
         while doloop:
-                r = requests.get(baseUrl, headers=headers) # curl
-                response = r.json() # jq
+                r = requests.get(baseUrl, headers=headers)
+                response = r.json()
                 result += extractTracks(response)
 
                 if response['next'] is not None:
